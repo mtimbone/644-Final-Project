@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pizza Order Form</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js">
+	</script>
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js">
+	</script>
+	<script src="js/script.js">
+	</script>
+  
+	<style>
+		
+	body {
+		background-image: url("img/pizza-background.jpg");
+		color: blue;
+		background-repeat: no-repeat;
+  	}
+	h1, h3 {
+		text-align: center;
+	}
+	h2 {
+		color: #000;
+		font-weight: bold;
+	}
+	.row img {
+		max-width: 100%;
+		height: auto;
+		width: 250px;
+    	border-radius: 15px;;
+	}
+	.row h1 {
+		margin: 2em;
+	}
+	#totalPrice {
+		color: #ff0000;
+		font-size: 1em;
+		border: 1px solid black;
+		width: 12em;
+	} 
+	</style>
+
+</head>
+
+<body>
+	<header class="row">
+		<img alt="logo" src="img/pizza.jpg">
+		<div class="col-sm">
+			<h1>Pizza&Hungry</h1>
+		</div>
+	</header><br>
+	
+  <!-- Delivery Information  -->
+	
+  <div class="form">
+		<div class="container">
+			<div class="row">
+				<div>
+					<form id="deliveryLocation" name="deliveryLocation">
+						<h3>Enter Your Delivery Information</h3>
+						<div class="form-group">
+							<label for="name">Name</label> <input class="form-control form-control-sm" id="name" placeholder="First and Last Name" type="text"><span id="nameerror"></span>
+						</div>
+						<div class="form-group">
+							<label for="addressType">Address Type</label> <select class="form-control form-control-sm" id="addressType" name="address" onchange="checkOptions(this.value);">
+								<option>
+									Select Address Type
+								</option>
+								<option>
+									House
+								</option>
+								<option>
+									Apartment
+								</option>
+								<option>
+									Business
+								</option>
+								<option>
+									Campus
+								</option>
+								<option>
+									Hotel
+								</option>
+								<option>
+									Dorm
+								</option>
+								<option>
+									Other
+								</option>
+							</select> <input class="form-control form-control-sm" id="address" name="address" style="display:none;" type="text"><span id="addresserror"></span>
+						</div>
+						<div class="form-group">
+							<label for="streetAddress">Street Address:</label> <input class="form-control form-control-sm" id="streetAddress" placeholder="123 Main St." type="text"><span id="streeterror"></span>
+						</div>
+						<div class="form-group">
+							<label for="apartmentNumber">Apartment Suite or Room #:</label> <input class="form-control form-control-sm" id="apartmentNumber" placeholder="Optional" type="text"><span id="apartmenterror"></span>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="city">City:</label> <input class="form-control form-control-sm" id="city" placeholder="San Diego" type="text"><span id="cityerror"></span>
+							</div>
+							<div class="col">
+								<label for="state">State:</label> <input class="form-control form-control-sm" id="state" placeholder="CA" type="text"><span id="stateerror"></span>
+							</div>
+							<div class="col">
+								<label for="zipCode">Zip Code:</label> <input class="form-control form-control-sm" id="zipCode" placeholder="12345" type="text"><span id="ziperror"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="phoneNumber">Phone:</label> <input class="form-control form-control-sm" id="phoneNumber" placeholder="619-555-1212" type="text"><span id="phonenumbererror"></span>
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label> <input aria-describedby="email" class="form-control form-control-sm" id="email" placeholder="" type="email"><span id="emailerror"></span>
+						</div>
+					</form>
+				</div>
+			</div><br>
+		
+      <!-- Total Price -->
+		
+      <div class="col-md-8 col-md-offset-2">
+				<div class="col-md-8 col-md-offset-2">
+					<div id="total">
+						<div class="col-">
+							<div class="input-group-addon" id="tprice"></div>
+							<h2>Total Price</h2><input class="form-control form-control-sm" id="totalPrice" placeholder="Total Price" readonly type="text" value="0.00">
+						</div>
+					</div>
+				</div>
+				<hr>
+				<br>
+		
+        <!-- Build Your Pizza -->
+		
+        <form id="buildingPizza" name="buildingPizza">
+					<h1>Build Your Pizza</h1>
+					<div id="buildPizza">
+						<fieldset>
+							<legend></legend>
+							<h3><legend>Please Select Crust to Begin Your Order:</legend></h3>
+							<div class="form-check">
+								<label class="form-check-label" for="handTossed"><input class="form-check-input" id="handTossed" name="optdough" type="radio" value="HandTossed"> Hand Tossed</label>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label" for="thinCrust"><input class="form-check-input" id="thinCrust" name="optdough" type="radio" value="Thin Crust Pizza"> Thin Crust</label>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label" for="newYorkStyle"><input class="form-check-input" id="newYorkStyle" name="optdough" type="radio" value="NewYork Style Pizza"> New York Style</label>
+							</div>
+							<div class="form-check">
+								<label class="form-check-label" for="glutenFree"><input class="form-check-input" id="glutenFree" name="optdough" type="radio" value="Gluten Free pizza"> Gluten Free</label>
+							</div>
+						</fieldset><br>
+		
+            <!-- Size and Cost -->
+		
+            <div class="form-group">
+							<label for="sizeCost"><strong>Size and Cost</strong></label> <select class="form-control form-control-sm" id="sizeCost">
+								<option value="0">
+									Select your size of pizza after selecting crust
+								</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="cheeseOptions"><strong>Choose Your Cheese:</strong></label> <select class="form-control form-control-sm" id="cheeseOptions">
+								<option value="0">
+									Light: $0.00
+								</option>
+								<option value="0">
+									Normal: $0.00
+								</option>
+								<option value="2.99">
+									Extra: +$2.99
+								</option>
+								<option value="3.99">
+									Double: +$3.99
+								</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="sauceOptions"><strong>Choose Your Sauce:</strong></label> <select class="form-control form-control-sm" id="sauceOptions">
+								<option value="0">
+									Regular Tomato: $0.00
+								</option>
+								<option value="0.99">
+									Hearty Tomato: +$.99
+								</option>
+								<option value="1.99">
+									BBQ Sauce: +$1.99
+								</option>
+							</select>
+						</div>
+					</div><br>
+			
+          <!-- Select Additional Toppings -->
+			
+          <div id="toppings">
+						<fieldset>
+							<legend>Select additional toppings ($.99 each):</legend>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="peppers" type="checkbox" value="peppers">Peppers</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="olives" type="checkbox" value="olives">Olives</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="jalapenos" type="checkbox" value="jalapenos">Jalapenos</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="mushrooms" type="checkbox" value="mushrooms">Mushrooms</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="pineapple" type="checkbox" value="pineapple">Pineapple</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="onion" type="checkbox" value="onion">Onion</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="pepperoni" type="checkbox" value="pepperoni">Pepperoni</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="sausage" type="checkbox" value="sausage">Sausage</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="ham" type="checkbox" value="ham">Ham</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="bacon" type="checkbox" value="bacon">Bacon</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<label class="form-check-label"><input class="form-check-input" id="salami" type="checkbox" value="salami">Salami</label>
+							</div>
+						</fieldset>
+					</div>
+          
+          <!-- Finish Building Pizza Button -->
+					
+          <div class="text-center">
+						<br>
+						<a id="confirmation"><button class="btn btn-lg btn-primary" type="submit">Finish Building Pizza</button></a><br>
+					</div>
+				</form>
+			</div>
+		</div><!-- 
+    
+      Billing Information -->
+		
+      <div id="billing" style="display: none;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<form id="billingInfo" name="billingInfo">
+							<h2 class="text-center"><br>
+							Billing Information</h2>
+							<div class="form-group has-success">
+								<label class="custom-control custom-checkbox" id="checkbox1"><input class="custom-control-input" id="bcheckBox" type="checkbox"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Same as a delivery location</span></label>
+							</div>
+							<div class="form-group">
+								<label for="name">Name:</label> <input class="form-control form-control-sm" id="name1" placeholder="Name" type="text"><span id="name1error"></span>
+							</div>
+							<div class="form-group">
+								<label for="streetAddress">Street Address:</label> <input class="form-control form-control-sm" id="streetAddress1" placeholder="Street Address" type="text"><span id="street1error"></span>
+							</div>
+							<div class="form-group">
+								<label for="apartmentNumber">Apartment #:</label> <input class="form-control form-control-sm" id="apartmentNumber1" placeholder="Apartment Number" type="text"><span id="apartment1error"></span>
+							</div>
+							<div class="form-group">
+								<label for="city">City:</label> <input class="form-control form-control-sm" id="city1" placeholder="City" type="text"><span id="city1error"></span>
+							</div>
+							<div class="form-group">
+								<label for="state">State:</label> <input class="form-control form-control-sm" id="state1" placeholder="State" type="text"><span id="state1error"></span>
+							</div>
+							<div class="form-group">
+								<label for="zipCode">Zip Code:</label> <input class="form-control form-control-sm" id="zipCode1" placeholder="Zip Code" type="text"><span id="zip1error"></span>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-8 col-md-offset-2">
+					<form id="payment" name="payment">
+						<fieldset>
+							<h2 class="text-center">Payment</h2>
+							<div class="creditCardForm">
+								<div class="payment">
+									<div class="form-group owner">
+										<label for="cardHolderName">Card Holder Name</label> <input class="form-control form-control-sm" id="cardHolderName" placeholder="Name on credit card" type="text"><span id="cardHolderNameError"></span>
+									</div>
+									<div class="form-group" id="card-Number">
+										<label for="cardNumber">Card Number</label> <input class="form-control form-control-sm" id="cardNumber" placeholder="Card number" type="text"><span id="cardNumberError"></span>
+									</div>
+									<div class="form-group CVV">
+										<label for="cvcCode">CVC Code</label> <input class="form-control form-control-sm" id="cvcCode" placeholder="CVC Security code" type="password"><span id="cvcCodeError"></span>
+									</div>
+									<div class="form-group" id="expirationDate">
+										<label>Expiration Date</label> <select id="month">
+											<option value="0">
+												Month
+											</option>
+											<option value="01">
+												January
+											</option>
+											<option value="02">
+												February
+											</option>
+											<option value="03">
+												March
+											</option>
+											<option value="04">
+												April
+											</option>
+											<option value="05">
+												May
+											</option>
+											<option value="06">
+												June
+											</option>
+											<option value="07">
+												July
+											</option>
+											<option value="08">
+												August
+											</option>
+											<option value="09">
+												September
+											</option>
+											<option value="10">
+												October
+											</option>
+											<option value="11">
+												November
+											</option>
+											<option value="12">
+												December
+											</option>
+										</select> <select id="year">
+											<option value="0">
+												YEAR
+											</option>
+											<option value="2017">
+												2017
+											</option>
+											<option value="2018">
+												2018
+											</option>
+											<option value="2019">
+												2019
+											</option>
+											<option value="2020">
+												2020
+											</option>
+											<option value="2021">
+												2021
+											</option>
+											<option value="2022">
+												2022
+											</option>
+											<option value="2023">
+												2023
+											</option>
+											<option value="2024">
+												2024
+											</option>
+											<option value="2025">
+												2025
+											</option>
+											<option value="2026">
+												2026
+											</option>
+											<option value="2027">
+												2027
+											</option>
+											<option value="2028">
+												2028
+											</option>
+										</select>
+									</div>
+									<div class="form-group" id="payNow">
+										<button class="btn btn-lg btn-primary" id="confirmPurchase" type="submit">Place Order</button>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
